@@ -29,6 +29,11 @@ body {
   min-height: 110rem;
 }
 
+main {
+  display: block;
+  padding: 0 1rem 3rem;
+}
+
 header {
   text-align: center;
 }
@@ -71,6 +76,7 @@ h1 {
   display: flex;
   align-items: center;
   width: 50%;
+  min-width: 0;
   border: 2px solid transparent;
 }
 
@@ -160,34 +166,33 @@ ol {
 }
 
 #game-board {
-  display: flex;
-  flex-wrap: wrap;
+  --cell-size: clamp(5rem, 10vw, 8rem);
+  display: grid;
   justify-content: center;
-  gap: 2rem;
+  gap: 1.5rem;
   margin: 3rem 0;
   padding: 0;
-  flex-direction: column;
 }
 
 #game-board ol {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(3, var(--cell-size));
   justify-content: center;
-  gap: 2rem;
+  gap: 1.5rem;
   margin: 0;
   padding: 0;
 }
 
 #game-board button {
-  width: 8rem;
-  height: 8rem;
+  width: var(--cell-size);
+  height: var(--cell-size);
   border: none;
   background: #aca788;
   color: #3f3b00;
-  font-size: 5rem;
+  font-size: clamp(2.5rem, 6vw, 5rem);
   cursor: pointer;
   font-family: 'Caprasimo', cursive;
-  padding: 1rem;
+  padding: 0;
 }
 
 #game-over {
@@ -283,6 +288,73 @@ ol {
   color: #23221f;
   font: inherit;
   margin-top: 1.5rem;
+}
+
+@media (max-width: 720px) {
+  body {
+    min-height: 100vh;
+  }
+
+  header img {
+    width: 6rem;
+    margin: 2rem auto 0.5rem auto;
+  }
+
+  h1 {
+    font-size: 2.2rem;
+    margin: 0 auto 2rem auto;
+  }
+
+  #game-container {
+    width: min(92vw, 40rem);
+    margin: 1.5rem auto;
+    padding: 1.25rem;
+  }
+
+  #players {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  #players li {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .player-name,
+  .player input {
+    width: min(70vw, 18rem);
+  }
+
+  .player-symbol {
+    margin-left: 0.5rem;
+  }
+
+  #pre-game button {
+    font-size: 3rem;
+  }
+
+  #game-board {
+    --cell-size: clamp(4.25rem, 22vw, 6rem);
+    gap: 0.75rem;
+    margin: 1.5rem 0;
+  }
+
+  #game-board ol {
+    gap: 0.75rem;
+  }
+
+  #game-over h2 {
+    font-size: 3rem;
+  }
+
+  #game-over p {
+    font-size: 1.5rem;
+  }
+
+  #game-over button {
+    font-size: 1.25rem;
+  }
 }
 
 @keyframes slide-in-from-left {
